@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Steganography</title>
+</head>
+<body style="padding: 30px; padding-left: 200px; padding-right: 200px;">
+    <div>
+        <h1 style="text-align: center;"> IMAGE STEGANOGRAPHY</h1>
+        <h3 style="text-align: right; "><a style="color: black;" href="home.htm">HOME </a></h3>
+    </div>
+    
+    <p> Steganography is a method of hiding secret data, by embedding it into an audio, video, image or text file. 
+        It is one of the methods employed to protect secret or sensitive data from malicious attacks.</p>
+    <p>
+        As the name suggests, <strong>Image Steganography</strong> refers to the process of hiding data(like image, text, etc.) within an image file. 
+        The image selected for this purpose is called the cover-image and the image obtained after steganography is called the stego-image.
+    </p>
+    <br><br>
+    <button onclick="Encode()">Encode the image</button>
+    <br><br>
+        <form  method="post" enctype="multipart/form-data" action="encrypt">
+            {% csrf_token %}
+            <div id="encode" style="display: none; padding-left: 50px;">
+                <ul>
+                    <li><label>Upload Cover image</label>
+                        <input type="file" name='cover' required>
+                    </li>
+                    <br><br>
+                    <li>
+                        <label>Upload Hidding image</label>
+                        <input type="file" name="hide" required>
+                    </li>
+                </ul>
+                
+                <br><br>
+                <button>Encrypt</button>
+                <br><br>
+
+                
+            </div>
+            <div id="encrypt">
+                <img style="width: 200px; height: 200px;" src="{{cover}}" alt="Cover Image">
+                <img src="./media/extra images/plus.jpg" alt="+" style="width: 100px; height: 150px;">
+                <img style="width: 200px; height: 200px;" src="{{hide}}" alt="Hidding Image">
+                <img src="./media/extra images/equal.jpg" alt="=" style="width: 100px; height: 150px;">
+                <img style="width: 200px; height: 200px;" src="{{encode}}" alt="Encrypted Image">
+            </div>
+            <br><br>
+        </form>
+    <button onclick="Decode()">Decode the image</button><br><br>
+        <form  method="post" enctype="multipart/form-data" action="decrypt">
+            {% csrf_token %}
+        <div  id="decode" style="display: none; padding-left: 50px;">
+            <ul>
+                <li>
+                    <label>Upload Encoded image</label>
+                    <input type="file" name="encodee" id="encodee" required>
+                </li>
+            </ul>
+            
+            <br><br>
+            <button>Decrypt</button>
+            <br><br>
+        </div>
+        <div id="decrypt">
+            <img style="width: 200px; height: 200px;" src="{{encodee}}" alt="Cover Image">
+            <img src="./media/extra images/implies.jpg" alt="+" style="width: 100px; height: 150px;">
+            <img style="width: 200px; height: 200px;" src="{{decode}}" alt="Decrypted Image"> 
+        </div>
+        </form>
+    <script>
+        function Encode(){
+            document.getElementById("encode").style.display="block"
+            document.getElementById("decode").style.display="none"
+        }
+        function Decode(){
+            document.getElementById("encode").style.display="none"
+            document.getElementById("decode").style.display="block"
+        }
+    </script>
+</body>
+</html>
